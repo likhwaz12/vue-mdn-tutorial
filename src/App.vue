@@ -1,20 +1,36 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>To-Do List</h1>  
+    <ul>
+      <li v-for="item in ToDoItems" :key="item.id">
+        <to-do-item :label="item.label" :done="item.done" :id="item.id"></to-do-item>
+      </li>
+    </ul>    
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+  import ToDoItem from "./components/ToDoItem";
+  import uniqueId from "lodash.uniqueid";
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  export default {
+    name: 'App',
+    components: {
+      ToDoItem
+    },
+    data() {
+      return {
+        ToDoItems: [
+          { id: uniqueId('todo-'), label: 'Learn Vue', done: true},
+          { id: uniqueId('todo-'), label: 'Create a Vue project with CLI', done: false},
+          { id: uniqueId('todo-'), label: 'Build a Vue App with APIs', done: false},
+          { id: uniqueId('todo-'), label: 'Host a Vue app', done: true},
+        ]
+      };
+    }    
+  };
 </script>
+
 
 <style>
 #app {
